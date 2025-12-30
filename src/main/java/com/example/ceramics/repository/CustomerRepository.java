@@ -1,0 +1,10 @@
+package com.example.ceramics.repository;
+
+import com.example.ceramics.model.Customer;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface CustomerRepository extends JpaRepository<String, Customer> {
+
+}
