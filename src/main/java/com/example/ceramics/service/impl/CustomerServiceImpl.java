@@ -15,9 +15,14 @@ public class CustomerServiceImpl implements ICustomerService {
 
     private final CustomerRepository customerRepository;
 
-    public Customer create(Customer customer) {
-        if (!customerRepository.existsByEmail(customer.getEmail())) {
-            return customerRepository.save(customer);
+    public void save(CustomerDTO customerDTO) {
+        if (!customerRepository.existsByEmail(customerDTO.getEmail())) {
+            Customer customer = Customer.builder()
+                    .phone(customerDTO.getPhone())
+                    .name(customerDTO.getName())
+                    .build();
+
+            customerRepository.save(customer);
         } else {
             throw new IllegalArgumentException("Customer with this name already exists, try with another one.");
         }
@@ -27,7 +32,7 @@ public class CustomerServiceImpl implements ICustomerService {
         return customerRepository.findById(id).orElseThrow(() -> new RuntimeException("Customer not found"));
     }
 
-    public List<Customer> customers() {
+    public List<Customer> findAll() {
         return customerRepository.findAll();
     }
 
@@ -40,12 +45,8 @@ public class CustomerServiceImpl implements ICustomerService {
         return customerRepository.save(customer);
     }
 
-    public void delete(Customer customer) {
-        if (!customerRepository.existsByEmail(customer.getEmail())) {
-            throw new IllegalArgumentException("Customer to be deleted does not exist on database");
-        } else {
-            customerRepository.delete(customer);
-        }
+    public void deleteById(String id) {
+        customerRepository.deleteById(id);
     }
 
     //create
