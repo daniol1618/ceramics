@@ -3,6 +3,7 @@ package com.example.ceramics.controller;
 import com.example.ceramics.dto.CustomerDTO;
 import com.example.ceramics.model.Customer;
 import com.example.ceramics.service.impl.CustomerServiceImpl;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +21,7 @@ public class CustomerController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    private void save(@RequestBody CustomerDTO customerDTO) {
+    private void save(@Valid @RequestBody CustomerDTO customerDTO) {
         customerService.save(customerDTO);
     }
 
@@ -37,7 +38,7 @@ public class CustomerController {
     @PutMapping("/{id}")
     private void update(
             @PathVariable Long id,
-            @RequestBody CustomerDTO customerDTO
+            @Valid @RequestBody CustomerDTO customerDTO
     ) {
         customerService.update(id, customerDTO);
     }
