@@ -20,6 +20,7 @@ public class CustomerServiceImpl implements ICustomerService {
             Customer customer = Customer.builder()
                     .phone(customerDTO.getPhone())
                     .name(customerDTO.getName())
+                    .email(customerDTO.getEmail())
                     .build();
 
             customerRepository.save(customer);
@@ -28,7 +29,7 @@ public class CustomerServiceImpl implements ICustomerService {
         }
     }
 
-    public Customer findById(String id) {
+    public Customer findById(Long id) {
         return customerRepository.findById(id).orElseThrow(() -> new RuntimeException("Customer not found"));
     }
 
@@ -36,7 +37,7 @@ public class CustomerServiceImpl implements ICustomerService {
         return customerRepository.findAll();
     }
 
-    public Customer update(String id, CustomerDTO request) {
+    public Customer update(Long id, CustomerDTO request) {
         Customer customer = this.findById(id);
         customer.setName(request.getName());
         customer.setEmail(request.getEmail());
@@ -45,7 +46,7 @@ public class CustomerServiceImpl implements ICustomerService {
         return customerRepository.save(customer);
     }
 
-    public void deleteById(String id) {
+    public void deleteById(Long id) {
         customerRepository.deleteById(id);
     }
 

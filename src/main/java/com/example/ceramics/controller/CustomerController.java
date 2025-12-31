@@ -18,38 +18,33 @@ public class CustomerController {
         this.customerService = customerService;
     }
 
-    //c
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     private void save(@RequestBody CustomerDTO customerDTO) {
         customerService.save(customerDTO);
     }
 
-    //r
     @GetMapping("/{id}")
-    private Customer findById(@PathVariable String id) {
+    private Customer findById(@PathVariable Long id) {
         return customerService.findById(id);
     }
 
-    //r
-    @GetMapping("/{id}")
-    private List<Customer> findAll(@PathVariable String id) {
+    @GetMapping
+    private List<Customer> findAll() {
         return customerService.findAll();
     }
 
-    //u
     @PutMapping("/{id}")
     private void update(
-            @PathVariable String id,
+            @PathVariable Long id,
             @RequestBody CustomerDTO customerDTO
     ) {
         customerService.update(id, customerDTO);
     }
 
-    //d
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    private void deleteById(@PathVariable String id) {
+    private void deleteById(@PathVariable Long id) {
         customerService.deleteById(id);
     }
 }
