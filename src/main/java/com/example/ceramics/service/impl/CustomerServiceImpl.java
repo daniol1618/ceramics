@@ -1,6 +1,7 @@
 package com.example.ceramics.service.impl;
 
 import com.example.ceramics.dto.CustomerDTO;
+import com.example.ceramics.exception.CustomerNotFoundException;
 import com.example.ceramics.model.Customer;
 import com.example.ceramics.repository.CustomerRepository;
 import com.example.ceramics.service.ICustomerService;
@@ -30,7 +31,7 @@ public class CustomerServiceImpl implements ICustomerService {
     }
 
     public Customer findById(Long id) {
-        return customerRepository.findById(id).orElseThrow(() -> new RuntimeException("Customer not found"));
+        return customerRepository.findById(id).orElseThrow(() -> new CustomerNotFoundException(id));
     }
 
     public List<Customer> findAll() {
