@@ -10,6 +10,7 @@ import com.example.ceramics.service.ICustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -43,6 +44,46 @@ public class CustomerServiceImpl implements ICustomerService {
     public List<CustomerDTO> getAll() {
         return customerRepository.findAll()
                 .stream()
+                .map(customerMapper::toDto)
+                .toList();
+    }
+
+    /**
+     * Retrieves all customers ordered by age using their natural ordering
+     * as defined by the {@link Comparable} implementation in {@link Customer}.
+     *
+     * <p>
+     * The sorting is performed in-memory after retrieving all customers
+     * from the database. This implements Comparable, the getOrderedByAgeDesc method implements Comparator which is different
+     * </p>
+     *
+     * @return a list of {@link CustomerDTO} objects sorted by age
+     */
+    public List<CustomerDTO> getOrderedByAge() {
+        return customerRepository.findAll()
+                .stream()
+                .sorted()
+                .map(customerMapper::toDto)
+                .toList();
+    }
+
+    /**
+     * Retrieves all customers ordered by age in descending order.
+     *
+     * <p>
+     * The ordering is performed in-memory using a {@link Comparator},
+     * after fetching the customers from the database.
+     * This method does <strong>not</strong> affect the persistence order
+     * in the database.
+     * </p>
+     *
+     * @return a list of {@link CustomerDTO} objects sorted by age
+     * from highest to lowest
+     */
+    public List<CustomerDTO> getOrderedByAgeDesc() {
+        return customerRepository.findAll()
+                .stream()
+                .sorted(Comparator.comparing(Customer::getAge).reversed())
                 .map(customerMapper::toDto)
                 .toList();
     }

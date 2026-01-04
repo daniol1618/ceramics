@@ -12,6 +12,7 @@ public class CustomerMapper {
                 .name(dto.getName())
                 .email(dto.getEmail())
                 .phone(dto.getPhone())
+                .age(dto.getAge())
                 .build();
     }
 
@@ -20,6 +21,7 @@ public class CustomerMapper {
                 .name(customer.getName())
                 .email(customer.getEmail())
                 .phone(customer.getPhone())
+                .age(customer.getAge())
                 .build();
     }
 }

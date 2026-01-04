@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Customer {
+public class Customer implements Comparable<Customer> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,13 +26,21 @@ public class Customer {
     @Column(nullable = false, unique = true)
     private String email;
 
+    @Column(unique = true)
     private String phone;
 
     private LocalDateTime createdAt;
 
+    @Column(nullable = false)
+    private Integer age;
+
     @PrePersist
-    void onSave(){
+    void onSave() {
         createdAt = LocalDateTime.now();
     }
 
+    @Override
+    public int compareTo(Customer other) {
+        return this.age.compareTo(other.age);
+    }
 }

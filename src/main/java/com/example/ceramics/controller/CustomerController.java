@@ -30,9 +30,20 @@ public class CustomerController {
         return customerService.getById(id);
     }
 
+
     @GetMapping
     private List<CustomerDTO> findAll() {
         return customerService.getAll();
+    }
+
+    @GetMapping("/sorted/comparable")
+    private List<CustomerDTO> findOrderedByAge() {
+        return customerService.getOrderedByAge();
+    }
+
+    @GetMapping("/sorted/comparator")
+    private List<CustomerDTO> findOrderedByAgeDesc() {
+        return customerService.getOrderedByAgeDesc();
     }
 
     @PutMapping("/{id}")

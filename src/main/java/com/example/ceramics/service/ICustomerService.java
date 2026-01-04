@@ -15,4 +15,9 @@ public interface ICustomerService {
     CustomerDTO update(Long id, CustomerDTO request);
 
     void deleteById(Long id);
+
+
+    List<CustomerDTO> getOrderedByAge();
+
+    List<CustomerDTO> getOrderedByAgeDesc();
 }
