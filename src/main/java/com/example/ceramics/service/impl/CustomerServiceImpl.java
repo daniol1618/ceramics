@@ -1,7 +1,9 @@
 package com.example.ceramics.service.impl;
 
 import com.example.ceramics.dto.CustomerDTO;
+import com.example.ceramics.exception.CustomerAlreadyExistsException;
 import com.example.ceramics.exception.CustomerNotFoundException;
+import com.example.ceramics.mapper.CustomerMapper;
 import com.example.ceramics.model.Customer;
 import com.example.ceramics.repository.CustomerRepository;
 import com.example.ceramics.service.ICustomerService;
@@ -15,44 +17,54 @@ import java.util.List;
 public class CustomerServiceImpl implements ICustomerService {
 
     private final CustomerRepository customerRepository;
+    private final CustomerMapper customerMapper;
 
-    public void save(CustomerDTO customerDTO) {
-        if (!customerRepository.existsByEmail(customerDTO.getEmail())) {
-            Customer customer = Customer.builder()
-                    .phone(customerDTO.getPhone())
-                    .name(customerDTO.getName())
-                    .email(customerDTO.getEmail())
-                    .build();
-
-            customerRepository.save(customer);
-        } else {
-            throw new IllegalArgumentException("Customer with this name already exists, try with another one.");
+    @Override
+    public CustomerDTO create(CustomerDTO request) {
+        if (customerRepository.existsByEmail(request.getEmail())) {
+            throw new CustomerAlreadyExistsException(request.getEmail());
         }
+
+        Customer customer = customerMapper.toEntity(request);
+        Customer savedCustomer = customerRepository.save(customer);
+
+        return customerMapper.toDto(savedCustomer);
     }
 
-    public Customer findById(Long id) {
-        return customerRepository.findById(id).orElseThrow(() -> new CustomerNotFoundException(id));
+    @Override
+    public CustomerDTO getById(Long id) {
+        Customer customer = customerRepository.findById(id)
+                .orElseThrow(() -> new CustomerNotFoundException(id));
+
+        return customerMapper.toDto(customer);
     }
 
-    public List<Customer> findAll() {
-        return customerRepository.findAll();
+    @Override
+    public List<CustomerDTO> getAll() {
+        return customerRepository.findAll()
+                .stream()
+                .map(customerMapper::toDto)
+                .toList();
     }
 
-    public Customer update(Long id, CustomerDTO request) {
-        Customer customer = this.findById(id);
+    @Override
+    public CustomerDTO update(Long id, CustomerDTO request) {
+        Customer customer = customerRepository.findById(id)
+                .orElseThrow(() -> new CustomerNotFoundException(id));
+
         customer.setName(request.getName());
         customer.setEmail(request.getEmail());
         customer.setPhone(request.getPhone());
 
-        return customerRepository.save(customer);
+        Customer updatedCustomer = customerRepository.save(customer);
+        return customerMapper.toDto(updatedCustomer);
     }
 
+    @Override
     public void deleteById(Long id) {
+        if (!customerRepository.existsById(id)) {
+            throw new CustomerNotFoundException(id);
+        }
         customerRepository.deleteById(id);
     }
-
-    //create
-    //review
-    //update
-    //delete
 }

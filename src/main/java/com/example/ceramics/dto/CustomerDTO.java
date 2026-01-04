@@ -3,9 +3,11 @@ package com.example.ceramics.dto;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
+import lombok.Builder;
 import lombok.Data;
 
 @Data
+@Builder
 public class CustomerDTO {
     @NotBlank(message = "name is required")
     private String name;

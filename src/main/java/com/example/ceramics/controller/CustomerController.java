@@ -22,17 +22,17 @@ public class CustomerController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     private void save(@Valid @RequestBody CustomerDTO customerDTO) {
-        customerService.save(customerDTO);
+        customerService.create(customerDTO);
     }
 
     @GetMapping("/{id}")
-    private Customer findById(@PathVariable Long id) {
-        return customerService.findById(id);
+    private CustomerDTO findById(@PathVariable Long id) {
+        return customerService.getById(id);
     }
 
     @GetMapping
-    private List<Customer> findAll() {
-        return customerService.findAll();
+    private List<CustomerDTO> findAll() {
+        return customerService.getAll();
     }
 
     @PutMapping("/{id}")
