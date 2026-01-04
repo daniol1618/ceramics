@@ -4,18 +4,7 @@ import com.example.ceramics.dto.CustomerDTO;
 
 import java.util.List;
 
-public interface ICustomerService {
-
-    CustomerDTO create(CustomerDTO request);
-
-    CustomerDTO getById(Long id);
-
-    List<CustomerDTO> getAll();
-
-    CustomerDTO update(Long id, CustomerDTO request);
-
-    void deleteById(Long id);
-
+public interface ICustomerService extends ICrudService<CustomerDTO, Long> {
 
     List<CustomerDTO> getOrderedByAge();
 
