@@ -1,7 +1,6 @@
 package com.example.ceramics.controller;
 
 import com.example.ceramics.dto.CustomerDTO;
-import com.example.ceramics.model.Customer;
 import com.example.ceramics.service.impl.CustomerServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
