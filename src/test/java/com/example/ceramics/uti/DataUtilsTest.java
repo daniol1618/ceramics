@@ -31,4 +31,17 @@ public class DataUtilsTest {
         assertEquals(List.of(8, 2222, 4, 66), evenNumbers);
     }
 
+    @Test
+    public void shouldToUpperCase() {
+        //Given
+        List<String> elements = List.of("John", "Barbara", "Martin", "Fowler");
+
+        //When
+        var converted = dataUtils.toUpperCase(elements);
+
+        //Then
+        assertEquals(List.of("JOHN", "BARBARA", "MARTIN", "FOWLER"), converted);
+
+    }
+
 }

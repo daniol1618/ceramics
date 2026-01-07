@@ -10,7 +10,7 @@ public class DataUtils {
 
     /*
     Given a List<Integer>, return a new list containing only even numbers.
-     */
+    */
     public List<Integer> evenNumbers(List<Integer> elements) {
 
         return elements.stream()
@@ -18,5 +18,13 @@ public class DataUtils {
                 .collect(Collectors.toList());
     }
 
+    /*
+    Given a List<String>, convert all strings to uppercase.
+    */
+    public List<String> toUpperCase(List<String> elements) {
+        return elements.stream()
+                .map(x -> x.toUpperCase())
+                .collect(Collectors.toList());
+    }
 
 }
