@@ -27,4 +27,13 @@ public class DataUtils {
                 .collect(Collectors.toList());
     }
 
+    /*
+    Given a List<Integer> and a value x, count how many numbers are greater than x.
+    */
+    public int countNumbers(List<Integer> elements, int x) {
+        return (int) elements.stream()
+                .filter(a -> a > x)
+                .count();
+    }
+
 }

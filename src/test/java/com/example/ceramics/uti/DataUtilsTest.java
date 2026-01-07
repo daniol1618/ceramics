@@ -44,4 +44,17 @@ public class DataUtilsTest {
 
     }
 
+    @Test
+    public void shouldCountNumbers() {
+        //Given
+        var elements = List.of(0, 1, 63, 5, 988, 752, 32, -9, 51);
+        var x = 50;
+
+        //When
+        int returned = dataUtils.countNumbers(elements, x);
+        //Then
+        assertEquals(4, returned);
+    }
+
+    ;
 }
