@@ -1,7 +1,12 @@
 package com.example.ceramics.util;
 
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 /**
  * Utility class to handle data utilizing Streams
@@ -9,7 +14,7 @@ import java.util.stream.Collectors;
 public class DataUtils {
 
     /*
-    Given a List<Integer>, return a new list containing only even numbers.
+    Basic: Given a List<Integer>, return a new list containing only even numbers.
     */
     public List<Integer> evenNumbers(List<Integer> elements) {
 
@@ -19,7 +24,7 @@ public class DataUtils {
     }
 
     /*
-    Given a List<String>, convert all strings to uppercase.
+    Basic: Given a List<String>, convert all strings to uppercase.
     */
     public List<String> toUpperCase(List<String> elements) {
         return elements.stream()
@@ -28,12 +33,49 @@ public class DataUtils {
     }
 
     /*
-    Given a List<Integer> and a value x, count how many numbers are greater than x.
+    Basic: Given a List<Integer> and a value x, count how many numbers are greater than x.
     */
     public int countNumbers(List<Integer> elements, int x) {
         return (int) elements.stream()
                 .filter(a -> a > x)
                 .count();
+    }
+
+    /*
+    Basic: Given an int[], compute the sum of all numbers using streams.
+    */
+    public int sumOfNumbers(int[] elements) {
+        return Arrays.stream(elements).sum();
+    }
+
+    /*
+    Basic: Given a List<String>, remove all empty ("") strings.
+    */
+    public List<String> removeAllEmptyStrings(List<String> elements) {
+        return elements.stream()
+                .filter(x -> !x.isEmpty())
+                .collect(Collectors.toList());
+    }
+
+
+    /*
+    Intermediate: Given a Set<Integer>, return a List<Integer> containing the square of each number.
+    */
+    public List<Integer> squaredNumbers(Set<Integer> elements) {
+        return elements.stream()
+                .sorted()
+                .map(x -> x * x)
+                .collect(Collectors.toList());
+    }
+
+    /*
+    Given a List<String>, find the longest string.
+    */
+    public List<String> getLongestString(List<String> elements) {
+        return elements.stream()
+                .sorted(Comparator.comparing(x -> x.length()))
+                .forEach(x-> System.out.println(x))
+                .collect(Collectors.toList());
     }
 
 }
