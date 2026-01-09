@@ -97,7 +97,7 @@ public class DataUtilsTest {
         //Given
         List<String> elements = List.of("Batman", "Robin", "Super Man");
         //When
-        List<String> longestString = dataUtils.getLongestString(elements);
+        String longestString = dataUtils.getLongestString(elements);
         //Then
         assertEquals("Super Man", longestString);
     }

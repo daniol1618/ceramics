@@ -1,9 +1,6 @@
 package com.example.ceramics.util;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -71,11 +68,9 @@ public class DataUtils {
     /*
     Given a List<String>, find the longest string.
     */
-    public List<String> getLongestString(List<String> elements) {
-        return elements.stream()
-                .sorted(Comparator.comparing(x -> x.length()))
-                .forEach(x-> System.out.println(x))
-                .collect(Collectors.toList());
+    public String getLongestString(List<String> elements) {
+        Optional<String> result = elements.stream()
+                .max(Comparator.comparing(s -> s.length()));
+        return result.isPresent() ? result.get() : "";
     }
-
 }
