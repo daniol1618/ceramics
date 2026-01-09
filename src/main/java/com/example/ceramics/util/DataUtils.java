@@ -73,4 +73,16 @@ public class DataUtils {
                 .max(Comparator.comparing(s -> s.length()));
         return result.isPresent() ? result.get() : "";
     }
+
+    /*
+    Given a List<String>, join them into a single comma-separated string.
+    */
+
+    public String joinElements(List<String> elements) {
+        return elements.stream()
+                .peek(s -> System.out.println(s))
+                .collect(Collectors.joining(","));
+    }
+
+
 }

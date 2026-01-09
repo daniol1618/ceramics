@@ -101,4 +101,14 @@ public class DataUtilsTest {
         //Then
         assertEquals("Super Man", longestString);
     }
+
+    @Test
+    public void shouldGetJoinedElements() {
+        //Given
+        List<String> elements = List.of("H", "E", "LL", "O");
+        //When
+        String result = dataUtils.joinElements(elements);
+        //Then
+        assertEquals("H,E,LL,O", result);
+    }
 }
