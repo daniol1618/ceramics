@@ -84,5 +84,24 @@ public class DataUtils {
                 .collect(Collectors.joining(","));
     }
 
+    /*
+    Given a List<Integer> with duplicates, return a Set<Integer> with unique values.
+    */
+    public Set<Integer> getUniqueValues(List<Integer> elements) {
+        return elements.stream()
+                .peek(s -> System.out.println(s))
+                .collect(Collectors.toSet());
+    }
+
+    /*
+    Given a List<String>, check if any string starts with "A".
+    */
+
+    public boolean anyStartsWithLetterA(List<String> elements) {
+        String letter = "A";
+        return elements.stream()
+                .peek(s -> System.out.println(s))
+                .anyMatch(s -> String.valueOf(s.toUpperCase().charAt(0)).equals("A"));
+    }
 
 }

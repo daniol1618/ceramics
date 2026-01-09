@@ -111,4 +111,26 @@ public class DataUtilsTest {
         //Then
         assertEquals("H,E,LL,O", result);
     }
+
+    @Test
+    void shouldReturnUniqueValuesFromList() {
+        // Given
+        List<Integer> elements = List.of(2016, 2020, 2017, 2025, 2023, 2016, 2020, 2068);
+
+        // When
+        Set<Integer> result = dataUtils.getUniqueValues(elements);
+
+        // Then
+        assertEquals(Set.of(2016, 2020, 2017, 2025, 2023, 2068), result);
+    }
+
+    @Test
+    public void checkIfAnyStartsWithLetterA() {
+        //Given
+        List<String> elements = List.of("DANIEL", "Martha", "Anna", "Hanna");
+        //When
+        boolean result = dataUtils.anyStartsWithLetterA(elements);
+        //Then
+        assertEquals(true, result);
+    }
 }
