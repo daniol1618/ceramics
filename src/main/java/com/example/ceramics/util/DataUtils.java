@@ -1,9 +1,10 @@
 package com.example.ceramics.util;
 
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 /**
  * Utility class to handle data utilizing Streams
@@ -56,7 +57,7 @@ public class DataUtils {
 
 
     /*
-    Intermediate: Given a Set<Integer>, return a List<Integer> containing the square of each number.
+    Basic - Intermediate: Given a Set<Integer>, return a List<Integer> containing the square of each number.
     */
     public List<Integer> squaredNumbers(Set<Integer> elements) {
         return elements.stream()
@@ -102,6 +103,93 @@ public class DataUtils {
         return elements.stream()
                 .peek(s -> System.out.println(s))
                 .anyMatch(s -> String.valueOf(s.toUpperCase().charAt(0)).equals("A"));
+    }
+
+    /*
+    Given a List<Person>:
+
+    class Person {
+        String name;
+        int age;
+    }
+
+    Return all persons older than 18.
+     */
+    @AllArgsConstructor
+    @EqualsAndHashCode
+    public final class Person {
+        String name;
+        int age;
+    }
+
+    public List<Person> getOldersThan18(List<Person> people) {
+        return people.stream()
+                .filter(person -> person.age > 18)
+                .collect(Collectors.toList());
+    }
+
+    /*Average Age
+    From a List<Person>, compute the average age.*/
+
+    public Integer getAverageAge(List<Person> personas) {
+        return (int) personas.stream()
+                .mapToInt(value -> value.age)
+                .average()
+                .orElse(0.0);
+    }
+
+    /*
+        Group a List<Person> by age, returning:
+        Map<Integer, List<Person>>
+    */
+    public Map<Integer, List<Person>> groupByAge(List<Person> personas) {
+        return personas.stream()
+                .collect(Collectors.groupingBy(person -> person.age));
+    }
+
+    public void sampleMap() {
+        @AllArgsConstructor
+        class Student {
+            String name;
+            Integer age;
+        }
+        Student student = new Student("John", 1);
+        Student student2 = new Student("Charles", 8);
+        Student student3 = new Student("Martin", 65);
+
+        /*
+        1. Students added to the map as values
+         */
+       /* Map<Integer, Student> students = new HashMap<>();
+
+        students.put(1020, student);
+        students.put(2646, student2);
+        students.put(3546, student3);
+
+        students.forEach((element, student1) -> System.out.println(element + ";" + student1.name + "," + student1.age));
+
+        /*
+        List<Student> students added to the map as values
+         */
+
+        Map<Integer, List<Student>> mappedStudents = new HashMap<>();
+        List<Student> wStudentList = new ArrayList<>();
+        wStudentList.add(new Student("Bella", 66));
+        wStudentList.add(new Student("Natasha", 58));
+        wStudentList.add(new Student("Vanessa", 98));
+
+        List<Student> mStudentList = new ArrayList<>();
+        mStudentList.add(new Student("Frank", 12));
+        mStudentList.add(new Student("Charles", 5));
+        mStudentList.add(new Student("Bob", 8));
+
+        mappedStudents.put(1, wStudentList);
+        mappedStudents.put(2, mStudentList);
+
+        mappedStudents.forEach((x, y) -> {
+            System.out.println(x);
+            y.forEach(student1 -> System.out.println(student1.name + "," + student1.age));
+        });
     }
 
 }

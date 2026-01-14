@@ -3,11 +3,13 @@ package com.example.ceramics.uti;
 import com.example.ceramics.util.DataUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import com.example.ceramics.util.DataUtils.Person;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -133,4 +135,47 @@ public class DataUtilsTest {
         //Then
         assertEquals(true, result);
     }
+
+    @Test
+    public void shouldGetOldersThan18() {
+        //Given
+        Person person1 = dataUtils.new Person("Fabriccio", 55);
+        Person person2 = dataUtils.new Person("Antonela", 2);
+        Person person3 = dataUtils.new Person("Bella", 18);
+
+        List<DataUtils.Person> personas = new ArrayList<>();
+        personas.add(person1);
+        personas.add(person2);
+        personas.add(person3);
+
+
+        Person personaEsperada = dataUtils.new Person("Fabriccio", 55);
+        ArrayList<Person> personasEsperadas = new ArrayList<>();
+        personasEsperadas.add(personaEsperada);
+
+        //When
+        List<Person> result = dataUtils.getOldersThan18(personas);
+
+        //Then
+        assertEquals(result, personasEsperadas);
+    }
+
+    @Test
+    void shouldReturnAverageAge() {
+        //Given
+        Person person1 = dataUtils.new Person("Fabriccio", 55);
+        Person person2 = dataUtils.new Person("Antonela", 2);
+        Person person3 = dataUtils.new Person("Bella", 18);
+
+        List<DataUtils.Person> personas = new ArrayList<>();
+        personas.add(person1);
+        personas.add(person2);
+        personas.add(person3);
+        // When
+        int average = dataUtils.getAverageAge(personas);
+
+        // Then
+        assertEquals(25, average);
+    }
+
 }
