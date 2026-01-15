@@ -191,5 +191,17 @@ public class DataUtils {
             y.forEach(student1 -> System.out.println(student1.name + "," + student1.age));
         });
     }
+    /*
+    ADVANCED (Nested Structures & FlatMap)
+    Flatten Nested Lists
+    Given a List<List<Integer>>, return a flattened List<Integer>.
+     */
 
+    public List<Integer> flattenedList(List<List<Integer>> listOfListedElements) {
+        return listOfListedElements.stream()
+                .flatMap(x -> x.stream())
+                .toList();
+    }
+
+    ;
 }

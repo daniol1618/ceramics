@@ -178,4 +178,17 @@ public class DataUtilsTest {
         assertEquals(25, average);
     }
 
+    @Test
+    void shouldReturnFlattenedList() {
+        //Given
+        List<Integer> listedElements = List.of(1, 30, 55, 65, 89);  //Regular list of int elements
+        List<List<Integer>> listOfListedElements = List.of(listedElements); // Lis of the list (nested list)
+
+        //When
+        List<Integer> result = dataUtils.flattenedList(listOfListedElements);
+
+        //Then
+        assertEquals(listedElements, result);
+
+    }
 }
